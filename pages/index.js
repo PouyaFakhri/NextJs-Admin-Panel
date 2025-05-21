@@ -1,9 +1,10 @@
-import styles from '../styles/Home.module.css'
 
-export default function Home() {
+function LoginPage() {
   return (
-    <div className={styles.container}>
-      <h2> Home Page</h2>
+    <div>
+      <p> login </p>
     </div>
   )
 }
+
+export default LoginPage
