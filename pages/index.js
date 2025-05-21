@@ -1,9 +1,11 @@
-import styles from '../styles/Home.module.css'
+import styles from '../styles/LoginPage.module.css'
 
-export default function Home() {
+ function LoginPage() {
   return (
     <div className={styles.container}>
-      <h2> Home Page</h2>
+      <h2> Login </h2>
     </div>
   )
 }
+
+export default LoginPage
