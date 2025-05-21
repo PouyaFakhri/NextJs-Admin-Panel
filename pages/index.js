@@ -1,9 +1,8 @@
-import styles from '../styles/LoginPage.module.css'
 
- function LoginPage() {
+function LoginPage() {
   return (
-    <div className={styles.container}>
-      <h2> Login </h2>
+    <div>
+      <p> login </p>
     </div>
   )
 }
