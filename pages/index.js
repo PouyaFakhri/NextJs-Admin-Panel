@@ -3,6 +3,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Image from "next/image";
 import Link from "next/link";
+import styles from "../styles/LoginPage.module.css"
 
 function LoginPage() {
   const PasswordRegex =
@@ -30,10 +31,10 @@ function LoginPage() {
     console.log(data);
   };
   return (
-    <div>
-      <h2>بوت کمپ بوتواستارت</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
+    <div className={styles.container}>
+      <h2 className={styles.title}>بوت کمپ بوتواستارت</h2>
+      <form onSubmit={handleSubmit(onSubmit)}  className={styles.formBox}>
+        <div className={styles.formTop}>
           <Image
             src="/images/Union.png"
             alt="لوگوی بوتواستارت"
@@ -49,7 +50,7 @@ function LoginPage() {
             {...register("username")}
             autoComplete="username"
           />
-          <p>{errors.username?.message}</p>
+          <p className={styles.error}>{errors.username?.message}</p>
         </div>
         <div>
           <input
@@ -58,13 +59,14 @@ function LoginPage() {
             {...register("password")}
             autoComplete="current-password"
           />
-          <p>{errors.password?.message}</p>
+          <p className={styles.error}>{errors.password?.message}</p>
         </div>
         <button type="submit"> ورود </button>
-        <Link href="/register">ایجاد حساب کاربری</Link>
+        <Link href="/register" className={styles.link}>ایجاد حساب کاربری</Link>
       </form>
     </div>
   );
 }
 
 export default LoginPage;
+
