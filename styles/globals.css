@@ -34,3 +34,28 @@ body {
   overflow-x: hidden;
   font-family: "vazirmatin", sans-serif;
 }
+
+.Toastify__toast {
+  width: fit-content;
+  background: linear-gradient(135deg, #6e8efb, #a777e3) !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+  font-family: 'vazirmatin' !important;
+  font-size: 16px !important;
+  padding: 10px 20px !important;
+}
+
+.Toastify__progress-bar {
+  background: #ffffff !important;
+  opacity: 0.8 !important;
+}
+
+.Toastify__toast--success {
+  background: linear-gradient(135deg, #28a745, #71e3a0) !important; 
+}
+
+.Toastify__toast--error {
+  background: linear-gradient(135deg, #dc3545, #ff6b6b) !important;
+}
+

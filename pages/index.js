@@ -10,8 +10,7 @@ function LoginPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    reset,
+    formState: { errors }
   } = useForm({ resolver: yupResolver(schema) });
   const onSubmit = (data) => {
     console.log(data);
@@ -26,6 +25,7 @@ function LoginPage() {
             alt="لوگوی بوتواستارت"
             width={80}
             height={85}
+            priority
           />
           <p>فرم ورود </p>
         </div>
