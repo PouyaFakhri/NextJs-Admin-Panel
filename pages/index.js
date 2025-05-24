@@ -6,8 +6,14 @@ import styles from "../styles/LoginPage.module.css";
 import LoginFormValidator from "../utils/LoginFormValidator";
 import { UseLoginUser } from "./hooks/queries";
 import Cookies from "js-cookie";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { useRouter } from "next/router";
+
 
 function LoginPage() {
+  const {setIsAuthenticated} = useContext(AuthContext)
+  const router = useRouter()
   const { mutate, error } = UseLoginUser();
   const schema = LoginFormValidator();
   const {
@@ -23,10 +29,12 @@ function LoginPage() {
       },
       {
         onSuccess: (response) => {
-          console.log(response);
           Cookies.set("token", response.token);
+          setIsAuthenticated(true)
+          router.replace("/dashboard")
         },
         onError: () => {
+          setIsAuthenticated(false)
           error.response.data.message === "Invalid credentials"
             ? toast.error("نام کاربری یا رمز عبور اشتباه است")
             : toast.error("خطایی رخ داده است");
