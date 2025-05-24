@@ -3,8 +3,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "../styles/Register.module.css";
-import FormValidator from "../utils/FormValidator";
-import { UseRegisterUser } from "../hooks/queries";
+import RegisterFormValidator from "../utils/registerFormValidator";
+import { UseRegisterUser } from "./hooks/queries";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
@@ -28,7 +28,7 @@ function Register() {
     });
   };
 
-  const schema = FormValidator();
+  const schema = RegisterFormValidator();
 
   const {
     register,

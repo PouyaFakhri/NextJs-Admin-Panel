@@ -3,17 +3,36 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/LoginPage.module.css";
-import FormValidator from "../utils/FormValidator";
+import LoginFormValidator from "../utils/LoginFormValidator";
+import { UseLoginUser } from "./hooks/queries";
+import Cookies from "js-cookie";
 
 function LoginPage() {
-  const schema = FormValidator();
+  const { mutate, error } = UseLoginUser();
+  const schema = LoginFormValidator();
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
   const onSubmit = (data) => {
-    console.log(data);
+    mutate(
+      {
+        username: data.username,
+        password: data.password,
+      },
+      {
+        onSuccess: (response) => {
+          console.log(response);
+          Cookies.set("token", response.token);
+        },
+        onError: () => {
+          error.response.data.message === "Invalid credentials"
+            ? toast.error("نام کاربری یا رمز عبور اشتباه است")
+            : toast.error("خطایی رخ داده است");
+        },
+      }
+    );
   };
   return (
     <div className={styles.container}>

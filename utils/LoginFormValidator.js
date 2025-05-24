@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-const FormValidator = () => {
+const LoginFormValidator = () => {
   const PasswordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
@@ -15,14 +15,10 @@ const FormValidator = () => {
       .matches(
         PasswordRegex,
         "رمز عبور باید حداقل ۸ کاراکتر، شامل حروف بزرگ، کوچک، عدد و نماد باشد"
-      ),
-    ConfirmPassword: yup
-      .string()
-      .required("تایید رمز عبور الزامی است")
-      .oneOf([yup.ref("password")], " با رمز عبور وارد شده مطابقت ندارد"),
+      )
   });
 
   return schema
 };
 
-export default FormValidator
+export default LoginFormValidator
