@@ -3,6 +3,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import Image from "next/image";
+import styles from "../styles/Register.module.css"
 
 function Register() {
   const PasswordRegex =
@@ -38,17 +39,17 @@ function Register() {
   };
   
   return (
-    <div>
-      <h2>بوت کمپ بوتواستارت</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
+    <div className={styles.container}>
+      <h2 className={styles.title}>بوت کمپ بوتواستارت</h2>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.formBox}>
+        <div className={styles.formTop}>
           <Image
             src="/images/Union.png"
             alt="لوگوی بوتواستارت"
             width={80}
             height={85}
           />
-          <p>فرم ثبت نام </p>
+          <p className={styles.formTitle}>فرم ثبت نام </p>
         </div>
         <div>
           <input
@@ -57,7 +58,7 @@ function Register() {
             {...register("username")}
             autoComplete="username"
           />
-          <p>{errors.username?.message}</p>
+          <p className={styles.error}>{errors.username?.message}</p>
         </div>
         <div>
           <input
@@ -66,7 +67,7 @@ function Register() {
             {...register("password")}
             autoComplete="new-password"
           />
-          <p>{errors.password?.message}</p>
+          <p className={styles.error}>{errors.password?.message}</p>
         </div>
         <div>
           <input
@@ -75,10 +76,10 @@ function Register() {
             {...register("ConfirmPassword")}
             autoComplete="new-password"
           />
-          <p>{errors.ConfirmPassword?.message}</p>
+          <p className={styles.error}>{errors.ConfirmPassword?.message}</p>
         </div>
         <button type="submit"> ثبت نام </button>
-        <Link href="/">حساب کاربری دارید ؟</Link>
+        <Link href="/"  className={styles.link}>حساب کاربری دارید ؟</Link>
       </form>
     </div>
   );
