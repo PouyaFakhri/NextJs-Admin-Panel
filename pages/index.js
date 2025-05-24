@@ -1,26 +1,12 @@
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Image from "next/image";
 import Link from "next/link";
-import styles from "../styles/LoginPage.module.css"
+import styles from "../styles/LoginPage.module.css";
+import FormValidator from "../utils/FormValidator";
 
 function LoginPage() {
-  const PasswordRegex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  const schema = yup.object().shape({
-    username: yup
-      .string()
-      .required(" نام کاربری الزامی است")
-      .min(3, " حداقل 3 کاراکتر"),
-    password: yup
-      .string()
-      .required("رمز عبور الزامی است")
-      .matches(
-        PasswordRegex,
-        "رمز عبور باید حداقل ۸ کاراکتر، شامل حروف بزرگ، کوچک، عدد و نماد باشد"
-      ),
-  });
+  const schema = FormValidator();
   const {
     register,
     handleSubmit,
@@ -33,7 +19,7 @@ function LoginPage() {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>بوت کمپ بوتواستارت</h2>
-      <form onSubmit={handleSubmit(onSubmit)}  className={styles.formBox}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.formBox}>
         <div className={styles.formTop}>
           <Image
             src="/images/Union.png"
@@ -62,11 +48,12 @@ function LoginPage() {
           <p className={styles.error}>{errors.password?.message}</p>
         </div>
         <button type="submit"> ورود </button>
-        <Link href="/register" className={styles.link}>ایجاد حساب کاربری</Link>
+        <Link href="/register" className={styles.link}>
+          ایجاد حساب کاربری
+        </Link>
       </form>
     </div>
   );
 }
 
 export default LoginPage;
-

@@ -1,32 +1,13 @@
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import Image from "next/image";
-import styles from "../styles/Register.module.css"
+import styles from "../styles/Register.module.css";
+import FormValidator from "../utils/FormValidator";
 
 function Register() {
-  const PasswordRegex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-  const schema = yup.object().shape({
-    username: yup
-      .string()
-      .required(" نام کاربری الزامی است")
-      .min(3, " حداقل 3 کاراکتر"),
-    password: yup
-      .string()
-      .required("رمز عبور الزامی است")
-      .matches(
-        PasswordRegex,
-        "رمز عبور باید حداقل ۸ کاراکتر، شامل حروف بزرگ، کوچک، عدد و نماد باشد"
-      ),
-    ConfirmPassword: yup
-      .string()
-      .required("تایید رمز عبور الزامی است")
-      .oneOf([yup.ref("password")], " با رمز عبور وارد شده مطابقت ندارد"),
-  });
-
+  const schema = FormValidator();
   const {
     register,
     handleSubmit,
@@ -37,7 +18,7 @@ function Register() {
   const onSubmit = (data) => {
     console.log(data);
   };
-  
+
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>بوت کمپ بوتواستارت</h2>
@@ -79,7 +60,9 @@ function Register() {
           <p className={styles.error}>{errors.ConfirmPassword?.message}</p>
         </div>
         <button type="submit"> ثبت نام </button>
-        <Link href="/"  className={styles.link}>حساب کاربری دارید ؟</Link>
+        <Link href="/" className={styles.link}>
+          حساب کاربری دارید ؟
+        </Link>
       </form>
     </div>
   );
