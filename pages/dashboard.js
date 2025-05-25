@@ -1,4 +1,3 @@
-import styles from "../styles/Dashboard.module.css";
 import { CiSearch } from "react-icons/ci";
 import { BsPersonCircle } from "react-icons/bs";
 import { IoIosLogOut } from "react-icons/io";
@@ -22,8 +21,8 @@ function Dashboard() {
     }
   }, [isError, error]);
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
+    <div className="container">
+      <div className="header">
         <CiSearch size={24} />
         <input
           type="search"
@@ -31,19 +30,19 @@ function Dashboard() {
           onChange={(e) => setSearchKey(e.target.value)}
           value={searchKey}
         />
-        <div className={styles.headersprof}>
+        <div className="headersprof">
           <BsPersonCircle size={35} />
           <div>
             <h5>pouyaf98</h5>
             <p>مدیر</p>
           </div>
         </div>
-        <div className={styles.headerslog}>
-          <IoIosLogOut size={25} className={styles.logout} />
+        <div className="headerslog">
+          <IoIosLogOut size={25} className="logout" />
           <p>خروج</p>
         </div>
       </div>
-      <div className={styles.addproduct}>
+      <div className="addproduct">
         <div>
           <Image
             src="/images/setting-3.png"
@@ -55,21 +54,21 @@ function Dashboard() {
         </div>{" "}
         <button type="submit">افزودن محصول </button>
       </div>
-      <div className={styles.productManagement}>
+      <div className="productManagement">
         {isLoading ? (
           <Loader />
         ) : (
           <table>
-            <thead className={styles.thead}>
-              <tr className={styles.tabelHeader}>
+            <thead className="thead">
+              <tr className="tabelHeader">
                 <th> نام کالا</th>
                 <th> موجودی </th>
                 <th> قیمت</th>
                 <th> شناسه کالا </th>
-                <th className={styles.options}></th>
+                <th className="options"></th>
               </tr>
             </thead>
-            <tbody className={styles.tbody}>
+            <tbody className="tbody">
               {data?.data?.map((item) => {
                 return (
                   <CreateProduct
