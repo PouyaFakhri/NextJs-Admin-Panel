@@ -10,17 +10,24 @@ import CreateProduct from "../components/CreateProduct";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { AuthContext } from "../context/AuthContext";
+import Modal from "../components/Modal";
+import DeleteModal from "../components/DeleteModal";
 
 function Dashboard() {
   const router = useRouter();
   const { setIsAuthenticated } = useContext(AuthContext);
   const [page, setPage] = useState(1);
+  const [showModal, setShowModal] = useState(false);
+  const [showDelModal, setShowDelModal] = useState(false);
+  const [deleteProductId, setDeleteProductId] = useState();
+  const [editProductId, setEditProductId] = useState();
+  const [isEditModal, setIsEditModal] = useState(false);
   const [searchKey, setSearchKey] = useState("");
   const { isLoading, data, isError, error } = UseGetProducts({
     name: searchKey,
     page: page,
   });
-  const totalPages = data?.totalPages;
+  const totalPages = data?.totalPages || 0;
   useEffect(() => {
     if (isError) {
       toast.error("خطایی رخ داد مجدد تلاش کنید");
@@ -66,7 +73,15 @@ function Dashboard() {
           />
           <p>مدیریت کالا</p>
         </div>{" "}
-        <button type="submit">افزودن محصول </button>
+        <button type="submit" onClick={() => setShowModal(true)}>
+          افزودن محصول{" "}
+        </button>
+        {showModal && (
+          <Modal
+            OnClose={() => setShowModal(false)}
+            modal={{ isEditModal, setIsEditModal, setShowModal, editProductId }}
+          />
+        )}
       </div>
       <div className="productManagement">
         {isLoading ? (
@@ -84,10 +99,21 @@ function Dashboard() {
             </thead>
             <tbody className="tbody">
               {data?.data?.map((item) => {
-                return <CreateProduct key={item.id} value={item} />;
+                return (
+                  <CreateProduct
+                    key={item.id}
+                    value={item}
+                    delOpt={{ setShowDelModal }}
+                    setId={{ setDeleteProductId, setEditProductId }}
+                    modal={{ setIsEditModal, setShowModal }}
+                  />
+                );
               })}
             </tbody>
           </table>
+        )}
+        {showDelModal && (
+          <DeleteModal value={{ setShowDelModal, deleteProductId }} />
         )}
       </div>
     </div>
