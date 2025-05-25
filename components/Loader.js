@@ -1,13 +1,13 @@
 import { ClipLoader } from 'react-spinners'
-import styles from "../styles/Loader.module.css"
 
 function Loader() {
   return (
-    <div className={styles.loader}>
+    <div className="loader">
         <ClipLoader color="rgb(54, 215, 183)" size={60}/>
-        <p className={styles.text}> در حال دریافت اطلاعات ...</p>
+        <p className="loaderText"> در حال دریافت اطلاعات ...</p>
     </div>
   )
 }
 
 export default Loader
+
