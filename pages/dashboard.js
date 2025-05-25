@@ -3,20 +3,18 @@ import { BsPersonCircle } from "react-icons/bs";
 import { IoIosLogOut } from "react-icons/io";
 import Image from "next/image";
 import { UseGetProducts } from "../hooks/queries";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Loader from "../components/Loader";
 import CreateProduct from "../components/CreateProduct";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
-import { AuthContext } from "../context/AuthContext";
 import Modal from "../components/Modal";
 import DeleteModal from "../components/DeleteModal";
 import Pagination from "../components/Pagination";
 
 function Dashboard() {
   const router = useRouter();
-  const { setIsAuthenticated } = useContext(AuthContext);
   const [page, setPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [showDelModal, setShowDelModal] = useState(false);
@@ -56,7 +54,6 @@ function Dashboard() {
             size={25}
             className="logout"
             onClick={() => {
-              setIsAuthenticated(false);
               Cookies.remove("token");
               router.replace("/");
             }}
