@@ -12,6 +12,7 @@ import Cookies from "js-cookie";
 import { AuthContext } from "../context/AuthContext";
 import Modal from "../components/Modal";
 import DeleteModal from "../components/DeleteModal";
+import Pagination from "../components/Pagination";
 
 function Dashboard() {
   const router = useRouter();
@@ -116,6 +117,7 @@ function Dashboard() {
           <DeleteModal value={{ setShowDelModal, deleteProductId }} />
         )}
       </div>
+       <Pagination value={{page , setPage, totalPages }} />
     </div>
   );
 }
