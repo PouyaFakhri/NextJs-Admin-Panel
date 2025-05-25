@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/LoginPage.module.css";
 import LoginFormValidator from "../utils/LoginFormValidator";
-import { UseLoginUser } from "./hooks/queries";
+import { UseLoginUser } from "../hooks/queries";
 import Cookies from "js-cookie";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";

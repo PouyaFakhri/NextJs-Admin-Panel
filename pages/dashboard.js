@@ -1,24 +1,45 @@
+import styles from "../styles/Dashboard.module.css";
 import { CiSearch } from "react-icons/ci";
 import { BsPersonCircle } from "react-icons/bs";
 import { IoIosLogOut } from "react-icons/io";
 import Image from "next/image";
-import styles from "../styles/Dashboard.module.css"
+import { UseGetProducts } from "../hooks/queries";
+import { useState, useEffect } from "react";
+import Loader from "../components/Loader";
+import CreateProduct from "../components/CreateProduct";
+import { toast } from "react-toastify";
 
 function Dashboard() {
+  const [page, setPage] = useState(1);
+  const [searchKey, setSearchKey] = useState("");
+  const { isLoading, data, isError, error } = UseGetProducts({
+    name: searchKey,
+    page: page,
+  });
+  useEffect(() => {
+    if (isError) {
+      toast.error("خطایی رخ داد مجدد تلاش کنید");
+    }
+  }, [isError, error]);
   return (
-    <div  className={styles.container}>
+    <div className={styles.container}>
       <div className={styles.header}>
         <CiSearch size={24} />
-        <input type="search" placeholder=" جستجو کالا" />
+        <input
+          type="search"
+          placeholder=" جستجو کالا"
+          onChange={(e) => setSearchKey(e.target.value)}
+          value={searchKey}
+        />
         <div className={styles.headersprof}>
-          <BsPersonCircle size={35}  />
+          <BsPersonCircle size={35} />
           <div>
             <h5>pouyaf98</h5>
             <p>مدیر</p>
           </div>
         </div>
         <div className={styles.headerslog}>
-          <IoIosLogOut size={25} className={styles.logout}/>
+          <IoIosLogOut size={25} className={styles.logout} />
           <p>خروج</p>
         </div>
       </div>
@@ -35,18 +56,31 @@ function Dashboard() {
         <button type="submit">افزودن محصول </button>
       </div>
       <div className={styles.productManagement}>
-        <table>
-          <thead className={styles.thead}>
-            <tr className={styles.tabelHeader}>
-              <th> نام کالا</th>
-              <th> موجودی </th>
-              <th> قیمت</th>
-              <th> شناسه کالا </th>
-              <th className={styles.options}></th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <table>
+            <thead className={styles.thead}>
+              <tr className={styles.tabelHeader}>
+                <th> نام کالا</th>
+                <th> موجودی </th>
+                <th> قیمت</th>
+                <th> شناسه کالا </th>
+                <th className={styles.options}></th>
+              </tr>
+            </thead>
+            <tbody className={styles.tbody}>
+              {data?.data?.map((item) => {
+                return (
+                  <CreateProduct
+                    key={item.id}
+                    value={item}
+                  />
+                );
+              })}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );

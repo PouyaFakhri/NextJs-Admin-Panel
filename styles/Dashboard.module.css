@@ -19,6 +19,10 @@
   justify-content: space-between;
   margin-top: 5px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  -ms-border-radius: 16px;
+  -o-border-radius: 16px;
 }
 
 .header input {
@@ -99,7 +103,7 @@
 .addproduct div {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   gap: 10px;
 }
 
@@ -136,7 +140,7 @@
   width: 90%;
   margin: 0 auto;
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   justify-content: center;
   margin-top: 0px;
   background-color: #ffffff;
@@ -148,7 +152,7 @@
 .productManagement table {
   width: 100%;
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   flex-direction: column;
   gap: 10px;
   font-family: Vazirmatin;
@@ -175,4 +179,8 @@
 .tabelHeader th {
   text-align: right;
   width: 20%;
+}
+
+.tbody {
+  width: 100%;
 }
