@@ -22,14 +22,10 @@ export const UseLoginUser = () => {
 };
 
 export const UseGetProducts = ({ page = 1, limit = 10, name = "" }) => {
-  const getProducts = () => {
-    return api.get(
-      `products?page=${page}&limit=${limit}&name=${encodeURIComponent(name)}`
-    );
-  };
-  return useQuery({
-    queryKey: ["getProducts", name, limit,page],
-    queryFn: getProducts,
-    keepPreviousData: true
-  });
+ const GetProducter =  () =>  api.get(`products?page=${page}&limit=${limit}&name=${encodeURIComponent(name)}`)
+    return useQuery({
+        queryKey : ["products" , name  , page , limit],
+        queryFn : GetProducter ,
+        keepPreviousData: true
+    })
 };

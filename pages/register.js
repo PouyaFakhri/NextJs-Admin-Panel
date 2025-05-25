@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "../styles/Register.module.css";
 import RegisterFormValidator from "../utils/registerFormValidator";
-import { UseRegisterUser } from "./hooks/queries";
+import { UseRegisterUser } from "../hooks/queries"
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 

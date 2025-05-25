@@ -6,12 +6,11 @@ const api = axios.create({ baseURL: BaseURL });
 
 api.interceptors.request.use(
   (config) => {
-    const token = Cookies.get("token")
+    const token = Cookies.get("token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
-    } else {
-      return config;
     }
+    return config;
   },
   (error) => {
     return Promise.reject(error);
@@ -27,4 +26,4 @@ api.interceptors.response.use(
   }
 );
 
-export default api
+export default api;

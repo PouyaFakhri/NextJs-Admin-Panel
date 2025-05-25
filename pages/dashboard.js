@@ -4,8 +4,10 @@ import { BsPersonCircle } from "react-icons/bs";
 import { IoIosLogOut } from "react-icons/io";
 import Image from "next/image";
 import { UseGetProducts } from "../hooks/queries";
-import { useState } from "react";
-import Loader from "../components/Loader"
+import { useState, useEffect } from "react";
+import Loader from "../components/Loader";
+import CreateProduct from "../components/CreateProduct";
+import { toast } from "react-toastify";
 
 function Dashboard() {
   const [page, setPage] = useState(1);
@@ -14,7 +16,11 @@ function Dashboard() {
     name: searchKey,
     page: page,
   });
-
+  useEffect(() => {
+    if (isError) {
+      toast.error("خطایی رخ داد مجدد تلاش کنید");
+    }
+  }, [isError, error]);
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -63,7 +69,16 @@ function Dashboard() {
                 <th className={styles.options}></th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody className={styles.tbody}>
+              {data?.data?.map((item) => {
+                return (
+                  <CreateProduct
+                    key={item.id}
+                    value={item}
+                  />
+                );
+              })}
+            </tbody>
           </table>
         )}
       </div>
