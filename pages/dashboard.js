@@ -3,18 +3,31 @@ import { BsPersonCircle } from "react-icons/bs";
 import { IoIosLogOut } from "react-icons/io";
 import Image from "next/image";
 import { UseGetProducts } from "../hooks/queries";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useRouter } from "next/router";
 import Loader from "../components/Loader";
 import CreateProduct from "../components/CreateProduct";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
+import { AuthContext } from "../context/AuthContext";
+import Modal from "../components/Modal";
+import DeleteModal from "../components/DeleteModal";
 
 function Dashboard() {
+  const router = useRouter();
+  const { setIsAuthenticated } = useContext(AuthContext);
   const [page, setPage] = useState(1);
+  const [showModal, setShowModal] = useState(false);
+  const [showDelModal, setShowDelModal] = useState(false);
+  const [deleteProductId, setDeleteProductId] = useState();
+  const [editProductId, setEditProductId] = useState();
+  const [isEditModal, setIsEditModal] = useState(false);
   const [searchKey, setSearchKey] = useState("");
   const { isLoading, data, isError, error } = UseGetProducts({
     name: searchKey,
     page: page,
   });
+  const totalPages = data?.totalPages || 0;
   useEffect(() => {
     if (isError) {
       toast.error("خطایی رخ داد مجدد تلاش کنید");
@@ -38,7 +51,15 @@ function Dashboard() {
           </div>
         </div>
         <div className="headerslog">
-          <IoIosLogOut size={25} className="logout" />
+          <IoIosLogOut
+            size={25}
+            className="logout"
+            onClick={() => {
+              setIsAuthenticated(false);
+              Cookies.remove("token");
+              router.replace("/");
+            }}
+          />
           <p>خروج</p>
         </div>
       </div>
@@ -52,7 +73,15 @@ function Dashboard() {
           />
           <p>مدیریت کالا</p>
         </div>{" "}
-        <button type="submit">افزودن محصول </button>
+        <button type="submit" onClick={() => setShowModal(true)}>
+          افزودن محصول{" "}
+        </button>
+        {showModal && (
+          <Modal
+            OnClose={() => setShowModal(false)}
+            modal={{ isEditModal, setIsEditModal, setShowModal, editProductId }}
+          />
+        )}
       </div>
       <div className="productManagement">
         {isLoading ? (
@@ -74,11 +103,17 @@ function Dashboard() {
                   <CreateProduct
                     key={item.id}
                     value={item}
+                    delOpt={{ setShowDelModal }}
+                    setId={{ setDeleteProductId, setEditProductId }}
+                    modal={{ setIsEditModal, setShowModal }}
                   />
                 );
               })}
             </tbody>
           </table>
+        )}
+        {showDelModal && (
+          <DeleteModal value={{ setShowDelModal, deleteProductId }} />
         )}
       </div>
     </div>
