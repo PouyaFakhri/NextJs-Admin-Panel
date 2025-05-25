@@ -3,18 +3,24 @@ import { BsPersonCircle } from "react-icons/bs";
 import { IoIosLogOut } from "react-icons/io";
 import Image from "next/image";
 import { UseGetProducts } from "../hooks/queries";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useRouter } from "next/router";
 import Loader from "../components/Loader";
 import CreateProduct from "../components/CreateProduct";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
+import { AuthContext } from "../context/AuthContext";
 
 function Dashboard() {
+  const router = useRouter();
+  const { setIsAuthenticated } = useContext(AuthContext);
   const [page, setPage] = useState(1);
   const [searchKey, setSearchKey] = useState("");
   const { isLoading, data, isError, error } = UseGetProducts({
     name: searchKey,
     page: page,
   });
+  const totalPages = data?.totalPages;
   useEffect(() => {
     if (isError) {
       toast.error("خطایی رخ داد مجدد تلاش کنید");
@@ -38,7 +44,15 @@ function Dashboard() {
           </div>
         </div>
         <div className="headerslog">
-          <IoIosLogOut size={25} className="logout" />
+          <IoIosLogOut
+            size={25}
+            className="logout"
+            onClick={() => {
+              setIsAuthenticated(false);
+              Cookies.remove("token");
+              router.replace("/");
+            }}
+          />
           <p>خروج</p>
         </div>
       </div>
@@ -70,12 +84,7 @@ function Dashboard() {
             </thead>
             <tbody className="tbody">
               {data?.data?.map((item) => {
-                return (
-                  <CreateProduct
-                    key={item.id}
-                    value={item}
-                  />
-                );
+                return <CreateProduct key={item.id} value={item} />;
               })}
             </tbody>
           </table>
