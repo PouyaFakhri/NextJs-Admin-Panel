@@ -1,24 +1,38 @@
+import styles from "../styles/Dashboard.module.css";
 import { CiSearch } from "react-icons/ci";
 import { BsPersonCircle } from "react-icons/bs";
 import { IoIosLogOut } from "react-icons/io";
 import Image from "next/image";
-import styles from "../styles/Dashboard.module.css"
+import { UseGetProducts } from "./hooks/queries";
+import { useState } from "react";
 
 function Dashboard() {
+  const [page, setPage] = useState(1);
+  const [searchKey, setSearchKey] = useState("");
+  const { isLoading, data, isError, error } = UseGetProducts({
+    name: searchKey,
+    page: page,
+  });
+
   return (
-    <div  className={styles.container}>
+    <div className={styles.container}>
       <div className={styles.header}>
         <CiSearch size={24} />
-        <input type="search" placeholder=" جستجو کالا" />
+        <input
+          type="search"
+          placeholder=" جستجو کالا"
+          onChange={(e) => setSearchKey(e.target.value)}
+          value={searchKey}
+        />
         <div className={styles.headersprof}>
-          <BsPersonCircle size={35}  />
+          <BsPersonCircle size={35} />
           <div>
             <h5>pouyaf98</h5>
             <p>مدیر</p>
           </div>
         </div>
         <div className={styles.headerslog}>
-          <IoIosLogOut size={25} className={styles.logout}/>
+          <IoIosLogOut size={25} className={styles.logout} />
           <p>خروج</p>
         </div>
       </div>
