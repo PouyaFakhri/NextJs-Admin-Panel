@@ -1,4 +1,4 @@
-import api from "../../services/config.js";
+import api from "../services/config";
 import { useQuery, useMutation } from "@tanstack/react-query";
 
 export const UseRegisterUser = () => {

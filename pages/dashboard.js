@@ -3,8 +3,9 @@ import { CiSearch } from "react-icons/ci";
 import { BsPersonCircle } from "react-icons/bs";
 import { IoIosLogOut } from "react-icons/io";
 import Image from "next/image";
-import { UseGetProducts } from "./hooks/queries";
+import { UseGetProducts } from "../hooks/queries";
 import { useState } from "react";
+import Loader from "../components/Loader"
 
 function Dashboard() {
   const [page, setPage] = useState(1);
@@ -49,18 +50,22 @@ function Dashboard() {
         <button type="submit">افزودن محصول </button>
       </div>
       <div className={styles.productManagement}>
-        <table>
-          <thead className={styles.thead}>
-            <tr className={styles.tabelHeader}>
-              <th> نام کالا</th>
-              <th> موجودی </th>
-              <th> قیمت</th>
-              <th> شناسه کالا </th>
-              <th className={styles.options}></th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <table>
+            <thead className={styles.thead}>
+              <tr className={styles.tabelHeader}>
+                <th> نام کالا</th>
+                <th> موجودی </th>
+                <th> قیمت</th>
+                <th> شناسه کالا </th>
+                <th className={styles.options}></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        )}
       </div>
     </div>
   );
