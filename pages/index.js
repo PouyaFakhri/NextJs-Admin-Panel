@@ -50,7 +50,7 @@ function LoginPage() {
             height={85}
             priority
           />
-          <p>فرم ورود </p>
+          <p className={styles.formTitle}>فرم ورود </p>
         </div>
         <div>
           <input
