@@ -1,34 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# پنل مدیریت محصولات
 
-First, run the development server:
+این پروژه یک **پنل مدیریت** مدرن است که با **Next js** برای فرانت‌اند و **Node. js/Express** با مستندسازی API توسط **Swagger** برای بک‌اند توسعه داده شده است. این پنل به ادمین امکان مدیریت محصولات (اضافه کردن، ویرایش، حذف و جستجو) را می‌دهد و با رابط کاربری کاربرپسند و API‌های مستند شده تجربه‌ای حرفه‌ای ارائه می‌کند.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## امکانات
+- **مدیریت محصولات**:
+- اضافه کردن محصول جدید با جزئیات (نام، قیمت، توضیحات و غیره).
+- ویرایش محصولات موجود.
+- حذف محصولات.
+- **جستجوی بلادرنگ**: فیلتر کردن محصولات بر اساس نام
+- **احراز هویت**: ورود امن ادمین با استفاده از JWT
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## فناوری‌های استفاده‌شده
+- **فرانت‌اند**: Next Js، React Js، JavaScript، html، Css
+- **بک‌اند**: Node. js، Express. js
+- **ابزارها**: React-toastify، React-Query، Axios، React-Hook-Form-with-Yup
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## نصب و راه‌اندازی
+۱. **کلون کردن مخزن**:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+git clone https://github.com/your-username/NextJs-Admin-Panel.git 
+//
+cd NextJs-Admin-Panel
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+۲. **نصب وابستگی‌های فرانت‌اند**:
+npm install
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## مشارکت در پروژه
+ما از مشارکت شما استقبال می‌کنیم! برای همکاری:
+۱. مخزن را فورک کنید.
+۲. یک شاخه جدید بسازید (`git checkout -b feature/your-feature`).
+۳. تغییرات خود را کامیت کنید (`git commit -m \\\"اضافه کردن ویژگی جدید\\\"`).
+۴. شاخه را به مخزن خود پوش کنید (`git push origin feature/your-feature`).
+۵. یک Pull Request باز کنید.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## لایسنس
+این پروژه تحت لایسنس MIT منتشر شده است. برای جزئیات بیشتر فایل [LICENSE](LICENSE) را ببینید.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
