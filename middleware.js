@@ -5,11 +5,18 @@ export function middleware(req) {
   const { pathname } = req.nextUrl;
   const validPath = ["/", "/dashboard", "/register"];
 
+  if (
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/Fonts') ||
+    pathname.startsWith('/images') ||
+    pathname.match(/\.(woff2?|ttf|otf|eot|png|jpg|jpeg|gif|svg|css|js)$/)
+  ) {
+    return NextResponse.next();
+  }
+
   const isValidPath = validPath.some((path) => {
     return path === pathname;
   });
-
-  console.log(isValidPath);
 
   if (!isValidPath) {
    return token
@@ -29,5 +36,5 @@ export function middleware(req) {
 }
 
 export const config = {
-  matcher: ["/((?!_next|api).*)"],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
 };

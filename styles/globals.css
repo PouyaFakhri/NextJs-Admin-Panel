@@ -20,7 +20,7 @@ html {
 @font-face {
   font-family: "kalameh";
   src: url("/Fonts/Kalameh-Light.woff2") format("woff2"),
-    url("/Fonts/Kalameh-Light.ttf.ttf") format("truetype");
+    url("/Fonts/Kalameh-Light.ttf") format("truetype");
   font-display: swap;
 }
 
